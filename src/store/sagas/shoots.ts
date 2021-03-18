@@ -6,8 +6,11 @@ import { db } from '../../firebase-instance';
 import { Shoot } from '../../models/shoot.model';
 
 import * as actions from '../actions';
+import * as actionTypes from '../action_types';
 
 const ref = db.ref('shoots');
+
+
 
 export function createRefChannel(ref:any) {
   return eventChannel(emit => {
@@ -24,13 +27,24 @@ export function* getShootsSaga() {
     let shoots: Shoot[];
     yield ref.once('value').then(snapshot => {
       shoots = snapshot.val();
-      console.log('putting action.setShoots')
       put(actions.setShoots(shoots));
     });      
   }
   catch (err) {
     yield put(actions.getShootsError(err));
   }
+}
+
+export function* addShootSaga(action: actionTypes.AddShootActionType) {
+  yield put(actions.addShootStart());
+  try {
+    const newShootRef = ref.push();
+    yield newShootRef.set(action.shoot)
+    yield put(actions.addShootSuccess())
+  }
+  catch(err) {
+    yield put(actions.getShootsError(err))
+  }  
 }
 
 export function * shootsUpdatedSaga() {

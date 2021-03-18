@@ -5,36 +5,43 @@ interface ShootProps {
 }
 
 const shoot = (props: ShootProps) => {
-
-  const cameras = props.shoot.cameras;
-  const lenses = props.shoot.lenses;
-  const rolls = props.shoot.rolls;
-
+   
+  const { 
+    cameras, 
+    lenses, 
+    rolls,
+    client,
+    type,
+    description,
+    startDate,
+    endDate
+   } = props.shoot;
+  
   let cameraList = 'none';
       
-  if(cameras.length) {
+  if(Array.isArray(cameras)) {
     cameraList = cameras.join(', ');
   }
 
   let lensList =  'none';
   
-  if(lenses.length) {
+  if(Array.isArray(lenses)) {
     lensList = lenses.join(', ');
   }
 
   let rollList = 'none';
 
-  if(rolls.length) {
+  if(Array.isArray(rolls)) {
     rollList = rolls.join(', ');
   }
 
   return (
       <div className="container bg-gray-50 inline-block rounded border p-5 border-gray-100">  
-        <p>Client: {props.shoot.client}</p>
-        <p>Type: {props.shoot.type}</p>
-        <p>Description: {props.shoot.description}</p>
-        <p>Start Date: {props.shoot.startDate}</p>
-        <p>End Date: {props.shoot.endDate}</p>
+        <p>Client: {client}</p>
+        <p>Type: {type}</p>
+        <p>Description: {description}</p>
+        <p>Start Date: {startDate}</p>
+        <p>End Date: {endDate}</p>
         <p>Cameras: {cameraList}</p>
         <p>Lenses: {lensList}</p>
         <p>Rolls: {rollList}</p>

@@ -1,12 +1,15 @@
 import React from 'react';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
-import EquipmentManager from './containers/EquipmentManager/EquipmentManager';
 import Planner from './containers/Planner/Planner';
+import AddShoot from './components/Shoots/ShootForm/ShootForm';
+import EquipmentManager from './containers/EquipmentManager/EquipmentManager';
 import SupplyManager from './containers/SupplyManager/SupplyManager';
+
 
 let routes = (
   <Switch>
     <Route path="/" exact component={Planner} />
+    <Route path="/shoot/add" exact component={AddShoot} />
     <Route path="/equipment" render={(props) => <EquipmentManager {...props} />} />
     <Route path="/supplies" render={(props) => <SupplyManager {...props} />}/>
   </Switch>

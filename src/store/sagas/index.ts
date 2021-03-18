@@ -4,7 +4,7 @@ import * as actionTypes from '../action_types';
 
 import { getFilmListSaga, filmListUpdatedSaga } from './film';
 import { getCamerasSaga, camerasUpdatedSaga } from './cameras';
-import { getShootsSaga, shootsUpdatedSaga } from './shoots'
+import { addShootSaga, getShootsSaga, shootsUpdatedSaga } from './shoots'
 
 export function* watchFilmList() {
   yield takeEvery(actionTypes.GET_FILM_LIST, getFilmListSaga);
@@ -19,4 +19,5 @@ export function* watchCameras() {
 export function* watchShoots() {
   yield takeEvery(actionTypes.GET_SHOOTS, getShootsSaga);
   yield takeEvery(actionTypes.SHOOTS_UPDATED, shootsUpdatedSaga);
+  yield takeEvery(actionTypes.ADD_SHOOT, addShootSaga);
 }

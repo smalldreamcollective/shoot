@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { Shoot as ShootType} from '../../models/shoot.model';
 import Shoot from './Shoot/Shoot'
 
@@ -22,12 +23,17 @@ const shoots: React.FC<ShootsProps> = (props: ShootsProps) => {
     return prevArr.concat(currArr);
   }, []);
 
+  console.log(transformedShootList)
   let shoots = transformedShootList.map((shoot: any) => <Shoot key={shoot.client} shoot={shoot} />);
 
   return (
     <div className="container bg-gray-50 inline-block rounded border p-5 border-gray-100">  
       <p>Shoots</p>
-      <button className="bg-blue-600 border p-1 focus:border-0 focus:bg-blue-600 focus:border-blue-600 focus:ring-offset-0 rounded-md text-white">Add New Shoot</button>
+      <NavLink 
+        to="/shoot/add"
+        className="bg-blue-600 border p-1 focus:border-0 focus:bg-blue-600 focus:border-blue-600 focus:ring-offset-0 rounded-md text-white">
+          Add New Shoot
+      </NavLink>
       {shoots}
     </div>      
   );

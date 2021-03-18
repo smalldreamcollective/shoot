@@ -31,7 +31,6 @@ sagaMiddleware.run(watchCameras);
 sagaMiddleware.run(watchFilmList);
 sagaMiddleware.run(watchShoots);
 
-
 const app = (
   <Provider store={store}>
     <BrowserRouter>

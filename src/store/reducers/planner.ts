@@ -32,7 +32,6 @@ const isoSelected = (state =initialState, action: actionTypes.ISOSelectedActionT
 };
 
 const reducer = (state = initialState, action: actionTypes.PlannerActionTypes) => {
-  console.log(action)
   switch(action.type) {
     case actionTypes.ADD_CAMERA: return addCamera(state, action);
     case actionTypes.ADD_FILM: return addFilm(state, action);

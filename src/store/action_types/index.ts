@@ -77,6 +77,8 @@ export const GET_SHOOTS = 'GET_SHOOTS';
 export const GET_SHOOT = 'GET_SHOOT';
 export const SET_SHOOTS = 'SET_SHOOTS';
 export const ADD_SHOOT = 'ADD_SHOOT';
+export const ADD_SHOOT_START = 'ADD_SHOOT_START';
+export const ADD_SHOOT_SUCCESS = 'ADD_SHOOT_SUCCESS';
 export const UPDATE_SHOOT = 'UPDATE_SHOOT';
 export const DELETE_SHOOT = 'DELETE_SHOOT';
 export const GET_SHOOTS_ERROR = 'GET_SHOOTS_ERROR';
@@ -101,6 +103,14 @@ export interface AddShootActionType {
   shoot: Shoot;
 }
 
+export interface AddShootStartActionType {
+  type: typeof ADD_SHOOT_START;
+}
+
+export interface AddShootSuccessActionType {
+  type: typeof ADD_SHOOT_SUCCESS;
+}  
+
 export interface UpdateShootActionType {
   type: typeof UPDATE_SHOOT;
   id: string;
@@ -122,4 +132,4 @@ export interface ShootsUpdatedActionType {
   type: typeof SHOOTS_UPDATED;
 }
 
-export type ShootActionTypes = GetShootsActionType | GetShootActionType | SetShootsActionType| AddShootActionType | UpdateShootActionType | DeleteShootActionType | GetShootsErrorActionType | ShootsUpdatedActionType;
+export type ShootActionTypes = GetShootsActionType | GetShootActionType | SetShootsActionType| AddShootActionType | AddShootStartActionType | AddShootSuccessActionType | UpdateShootActionType | DeleteShootActionType | GetShootsErrorActionType | ShootsUpdatedActionType;

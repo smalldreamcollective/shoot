@@ -16,8 +16,6 @@ export const getShoot = (shoot_id: string) => {
 };
 
 export const setShoots = (shoots: Shoot[]) => {
-  console.log('SET shoots')
-  console.log(shoots)
   return {
     type: actionTypes.SET_SHOOTS,
     shoots: shoots
@@ -28,6 +26,18 @@ export const addShoot = (shoot: Shoot) => {
   return {
     type: actionTypes.ADD_SHOOT,
     shoot: shoot
+  };
+};
+
+export const addShootStart = () => {
+  return {
+    type: actionTypes.ADD_SHOOT_START
+  };
+};
+
+export const addShootSuccess = () => {
+  return {
+    type: actionTypes.ADD_SHOOT_SUCCESS
   };
 };
 
