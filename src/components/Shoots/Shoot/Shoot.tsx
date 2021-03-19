@@ -44,7 +44,7 @@ const shoot = (props: ShootProps) => {
         <p>End Date: {endDate}</p>
         <p>Cameras: {cameraList}</p>
         <p>Lenses: {lensList}</p>
-        <p>Rolls: {rollList}</p>
+        <p>Film: {rollList}</p>
       </div>      
   );
 };

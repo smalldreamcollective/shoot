@@ -3,12 +3,12 @@ import { Lense } from "./lense.model";
 import { Roll } from "./roll.model";
 
 export interface Shoot {
-  cameras: Camera[];
+  cameras: string[];
   client: string;
   description: string;
   endDate: string;
-  lenses: Lense[];
-  rolls: Roll[],
+  lenses: string[];
+  rolls: string[],
   startDate: string;
   type: string;
 }

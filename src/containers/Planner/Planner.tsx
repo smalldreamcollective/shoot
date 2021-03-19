@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import Shoots from '../../components/Shoots/Shoots';
 import CameraSelector from '../../components/CameraSelector/CameraSelector';

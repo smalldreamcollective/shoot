@@ -6,7 +6,7 @@ import App from './App';
 import plannerReducer from './store/reducers/planner';
 import filmReducer from './store/reducers/film';
 import camerasReducer from './store/reducers/cameras';
-import shootsReducer from './store/reducers/shoots'
+import shootsReducer from './store/reducers/shoots';
 
 import { watchCameras, watchFilmList, watchShoots } from './store/sagas/';
 

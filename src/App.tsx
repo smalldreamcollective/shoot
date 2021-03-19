@@ -1,5 +1,4 @@
-import React from 'react';
-import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import Planner from './containers/Planner/Planner';
 import AddShoot from './components/Shoots/ShootForm/ShootForm';
 import EquipmentManager from './containers/EquipmentManager/EquipmentManager';

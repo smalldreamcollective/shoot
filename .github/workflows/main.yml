@@ -35,7 +35,9 @@ jobs:
             echo REACT_APP_FIREBASE_API_KEY=${{ secrets.FIREBASE_API_KEY }} >> .env
             echo REACT_APP_FIREBASE_DB_URL=https://${{ secrets.FIREBASE_DB_URL_HOSTNAME }}.firebaseio.com/ >> .env
       - name: build app
-        run: npm run build      
+        run: npm run build
+      - name: test 
+        run: npm run test        
               
 
       # Runs a set of commands using the runners shell
