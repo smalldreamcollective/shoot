@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, screen } from './shared/test-utils';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';

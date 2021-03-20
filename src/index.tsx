@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
 
 import './index.css';
@@ -13,8 +12,14 @@ import { watchCameras, watchFilmList, watchShoots } from './store/sagas/';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { applyMiddleware, combineReducers, createStore } from 'redux';
+import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
+
+import { composeWithDevTools } from 'redux-devtools-extension';
+
+import { FormikProvider } from 'formik';
+
+const composeEnhancers = composeWithDevTools ({ trace: true, traceLimit: 25 });
 
 const rootReducer = combineReducers({
   planner: plannerReducer,
@@ -25,7 +30,7 @@ const rootReducer = combineReducers({
 
 const sagaMiddleware = createSagaMiddleware();
 
-const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(sagaMiddleware)));
 
 sagaMiddleware.run(watchCameras);
 sagaMiddleware.run(watchFilmList);

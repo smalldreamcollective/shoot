@@ -1,6 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Formik, FormikHelpers, Form, Field } from 'formik';
+
+import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Shoot } from '../../../models/shoot.model';
 import * as actions from '../../../store/actions/';
@@ -19,29 +21,33 @@ interface ShootFormValues {
 
 const validationSchema = Yup.object().shape({
   client: Yup.string()
-    .min(1)
-    .required('Required'),
+    .required('Required')
+    .min(1),
   type: Yup.string()
-    .min(1)
-    .required('Required'),
+    .required('Required')
+    .min(1),
   description: Yup.string()
-    .min(10)
-    .required('Required'),
+    .required('Required')
+    .min(10),
   startDate: Yup.string()
-    .min(6)
-    .required('Required'),
+    .required('Required')
+    .min(6),
   endDate: Yup.string()
-    .min(6)
-    .required('Required'),
-  cameras: Yup.string()
-    .required('Required'),
-  lenses: Yup.string()
-    .required('Required'),
-  rolls: Yup.string()
-    .required('Required'),
+    .required('Required')
+    .min(6),
+  cameras: Yup.array()
+    .min(1),
+  lenses: Yup.array()
+    .min(1),
+  rolls: Yup.array()
+    .min(1)
 });
 
 const ShootForm = () => {
+
+  const { errors, handleSubmit, register, reset, setValue } = useForm({
+    resolver: yupResolver(validationSchema)
+  });
 
   const dispatch = useDispatch();
 
@@ -51,6 +57,7 @@ const ShootForm = () => {
 
   const onSubmitShootForm = (shoot: Shoot) => {
     dispatch(actions.addShoot(shoot));
+    reset(initialValues);
   };   
 
   const initialValues: ShootFormValues = {
@@ -65,77 +72,63 @@ const ShootForm = () => {
   };
   
   return (
-  
     <div className="ShootForm">
       {isUpdating.toString()}
-      <Formik 
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={(
-          values: ShootFormValues, 
-          {setSubmitting, resetForm}: FormikHelpers<ShootFormValues>
-        ) => {
-          onSubmitShootForm(values);
-          resetForm({});
-        }}>
-          {({ handleChange, errors, touched }) => (
-          <Form>
+      
+          <form onSubmit={handleSubmit(onSubmitShootForm)}>
             <p>
               <label htmlFor="client">Client</label>
-              <Field id="client" name="client" placeholder="Client Name" />
-              {(errors.client && touched.client) && (<span>{errors.client}</span>)}
+              <input type="text" id="client" name="client" placeholder="Client Name" ref={register} />
+              {errors.client && <span>{errors.client?.message}</span>}
             </p>
             <p>
               <label htmlFor="type">Type</label>
-              <Field id="type" name="type" placeholder="Shoot Type" />
-              {(errors.type && touched.type) && (<span>{errors.type}</span>)}
+              <input type="text" id="type" name="type" placeholder="Shoot Type" ref={register} />
+              {errors.type && <span>{errors.type?.message}</span>}
             </p>
             <p>
               <label htmlFor="description">Description</label>
-              <Field as="textarea" id="description" name="description" placeholder="Enter a brief description." />
-              {(errors.description && touched.description) && (<span>{errors.description}</span>)}
+              <textarea id="description" name="description" placeholder="Enter a brief description." ref={register} />
+              {errors.description && <span>{errors.description?.message}</span>}
             </p>
             <p>
               <label htmlFor="startDate">Start Date</label>
-              <Field type="date" id="startDate" name="startDate" placeholder="Enter a start date." />
-              {(errors.startDate && touched.startDate) && (<span>{errors.startDate}</span>)}
+              <input type="date" id="startDate" name="startDate" placeholder="Enter a start date." ref={register} />
+              {errors.startDate && <span>{errors.startDate?.message}</span>}
             </p>
             <p>
               <label htmlFor="endDate">End Date</label>
-              <Field type="date" id="endDate" name="endDate" placeholder="Enter an end date." />
-              {(errors.endDate && touched.endDate) && (<span>{errors.endDate}</span>)}
+              <input type="date" id="endDate" name="endDate" placeholder="Enter an end date." ref={register} />
+              {errors.endDate && <span>{errors.endDate?.message}</span>}
             </p>
             <p>
               <label htmlFor="cameras">Cameras</label>
-              <Field component="select" id="cameras" name="cameras"  multiple>
+              <select id="cameras" name="cameras"  multiple ref={register}>
                 <option key="cam1" value="pentax">Pentax</option>
                 <option key="cam2" value="nikon">Nikon</option>
-              </Field>
-              {(errors.cameras && touched.cameras) && (<span>{errors.cameras}</span>)}
+              </select>
+              {errors.cameras && <span>{errors.cameras?.message}</span>}
             </p>
             <p>
               <label htmlFor="lenses">Lenses</label>
-              <Field component="select" id="lenses" name="lenses"  multiple>
+              <select id="lenses" name="lenses"  multiple ref={register}>
                 <option key="lens1" value="pentax80mm">Pentax 80mm</option>
                 <option key="lens2" value="nikon50mm">Nikon 50mm</option>
-              </Field>
-              {(errors.lenses && touched.lenses) && (<span>{errors.lenses}</span>)}
+              </select>
+              {errors.lenses && <span>{errors.lenses?.message}</span>}
             </p>
             <p>
               <label htmlFor="rolls">Film</label>
-              <Field component="select" id="rolls" name="rolls"  multiple 
-                onChange={(selectedOption: HTMLFormElement) => handleChange("rolls")(selectedOption.value)}>
+              <select id="rolls" name="rolls"  multiple ref={register}>
                 <option key="roll1" value="kodakTX400">Kodak TX400</option>
                 <option key="roll2" value="cinestill800T">CineStill 800T</option>
-              </Field>
-              {(errors.rolls && touched.rolls) && (<span>{errors.rolls}</span>)}
+              </select>
+              {errors.rolls && <span>{errors.rolls?.message}</span>}
             </p>
             <p>
               <button className="bg-blue-600 border p-1 focus:border-0 focus:bg-blue-600 focus:border-blue-600 focus:ring-offset-0 rounded-md text-white" type="submit" disabled={isUpdating}>Save</button>
             </p>
-          </Form>
-          )}
-      </Formik>   
+          </form>
     </div>
   )
 };
