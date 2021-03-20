@@ -45,7 +45,7 @@ const validationSchema = Yup.object().shape({
 
 const ShootForm = () => {
 
-  const { errors, handleSubmit, register, reset, setValue } = useForm({
+  const { errors, handleSubmit, register, reset } = useForm({
     resolver: yupResolver(validationSchema)
   });
 

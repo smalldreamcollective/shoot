@@ -1,4 +1,3 @@
-import React, { useCallback, useEffect } from 'react';
 /*
 MOVE WHAT'S NEEDED TO THE VIEWER FROM THE PLANNER CONTAINER
 */

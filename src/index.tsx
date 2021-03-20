@@ -12,12 +12,10 @@ import { watchCameras, watchFilmList, watchShoots } from './store/sagas/';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 
 import { composeWithDevTools } from 'redux-devtools-extension';
-
-import { FormikProvider } from 'formik';
 
 const composeEnhancers = composeWithDevTools ({ trace: true, traceLimit: 25 });
 

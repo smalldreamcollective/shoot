@@ -1,7 +1,6 @@
 import { useCallback, useEffect } from 'react';
 
 import Shoots from '../../components/Shoots/Shoots';
-import CameraSelector from '../../components/CameraSelector/CameraSelector';
 import { useDispatch, useSelector } from 'react-redux';
 
 import * as actions from '../../store/actions/';
@@ -10,28 +9,10 @@ import { RootState } from '../../store/reducers';
 const Planner = () => {
 
   const dispatch = useDispatch();
-
-  const camera = useSelector((state: RootState)  => {
-    return state.planner.camera;
-  });
-
-  const film = useSelector((state: RootState) => {
-    return state.planner.film;
-  });
-
-  const iso = useSelector((state: RootState) => {
-    return state.planner.iso;
-  });
   
-  const cameras = useSelector((state: RootState) => {
-    return state.cameras.cameras;
-  });
-
   const shoots = useSelector((state: RootState) => {
     return state.shoots.shoots;
-  })
-  
-  const onCameraAdded = (cameraName: string) => dispatch(actions.addCamera(cameras[cameraName]));
+  });
   
   const onGetFilmList = useCallback(() => dispatch(actions.getFilmList()), [dispatch]);
   const onFilmListUpdated = useCallback(() => dispatch(actions.filmListUpdated()), [dispatch]);
